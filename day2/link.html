@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ext link</title>
+    <style>
+        #name{
+            background-color: unset;
+        }
+        .bg-dark{
+            background-color: aqua;
+        }        
+        input {
+            background-color: red;
+        }
+        li:nth-child(even){
+            color: blue;
+        }
+        li:nth-child(odd){
+            color: red;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <details>
+        <summary>About anchor tag</summary>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus similique, nihil ea ducimus nesciunt id praesentium corporis quaerat omnis eveniet est quisquam aut, provident odio sapiente blanditiis beatae officia quia porro dignissimos. Dolores, autem dignissimos? Necessitatibus quod consequatur pariatur laudantium!
+    </details>
+    <ul>
+        <li>item 1</li>
+        <li>item-2</li>
+        <li>item-3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/2psMDrHV6Eg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+    <table>
+        <th>head1</th>
+        <th>head2</th>
+        <th>head3</th>
+        <tr>
+            <td rowspan="2"> Data1</td>
+            <td>Data2</td>
+        </tr>
+        <tr>
+            <td>Data2</td>
+        </tr>
+    </table>
+    <form action="">
+        <label for="name">Name</label>
+        <input type="text" id="name">
+    </form>
+    <input type="tel" maxlength="">
+    <input type="number" max="" min="">
+    <input type="password">
+    <input type="radio"> radio
+    <input type="checkbox" class="" name="" id="cb">
+    <input type="date" name="" id="">
+
+
+    <input type="text" class="bg-dark">
+    <input type="text" class="bg-dark">
+    <input type="text" class="bg-dark">
+    <input type="text" class="bg-dark">
+    <button id="btn">Click me</button>
+</body>
+<script>
+    const btn = document.getElementById("btn");
+    const input = document.getElementById("name");
+    btn.addEventListener('click',()=>{
+        alert(`Hi ${input.value}`);
+        input.value = "Button Clicked"
+    })
+</script>
+</html>
