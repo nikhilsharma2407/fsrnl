@@ -1,0 +1,45 @@
+body{
+    border: 1px solid black;
+}
+.bg{
+    background-color: aqua !important;
+    width: 200px;
+    padding: 5px;
+    border: 1px solid black;
+    margin: 10px;
+    top: 50px;
+    left: 30px;
+}
+
+
+#box:hover{
+    background-color: red;
+}
+
+li::marker{
+    color: red;
+}
+
+
+.container{
+    display: flex;
+    height: 500px;
+    border: 1px solid black;
+}
+
+.flex-item{
+    height: 50px;
+    width: 30%;
+    margin-right: 5px;
+    border: 1px dashed blue;
+    background-color: red;
+}
+
+@media screen and (max-width:500px) {
+    .container{
+        flex-direction: column;
+    }
+    .flex-item{
+        width: 100%;
+    }
+}
