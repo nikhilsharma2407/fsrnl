@@ -208,7 +208,7 @@ const fun = (a,b,...rest)=>{
     console.log(a,b,rest);
 }
 
-const defaultFn = (name = "test")=>{
+export default defaultFn = (name = "test")=>{
     console.log('Hello',name);
 }
 fun(1,2,3,4,5);
