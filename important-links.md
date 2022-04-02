@@ -15,3 +15,5 @@ https://www.geeksforgeeks.org/reactjs-lifecycle-components/
 
 https://react-bootstrap.netlify.app/components/navbar/#navbars
 
+how Virtual DOM works - React Reconciliation Algorithm
+https://reactjs.org/docs/reconciliation.html
