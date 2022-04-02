@@ -11,11 +11,13 @@ import {
 import Home from './Home';
 import TestClass from './TestClass';
 import Routing from './Routing';
+import MyNav from './Navbar/Nav';
 
 function App() {
   const name = "Nikhil";
   return (
     <BrowserRouter>
+    <MyNav />
     <Routes>
       <Route path="/" element={<Home />}/>
       {/* Route Param */}

@@ -12,6 +12,6 @@ https://dummyapi.io/docs
 https://www.geeksforgeeks.org/reactjs-lifecycle-components/
 
 
-https://mui.com/components/tabs/#nav-tabs
 
 https://react-bootstrap.netlify.app/components/navbar/#navbars
+

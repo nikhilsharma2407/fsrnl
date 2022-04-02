@@ -3,3 +3,5 @@ npm i axios
 login to github -> fetch upstream
 
 npm i react-router-dom@6
+
+npm install react-bootstrap bootstrap@5.1.3

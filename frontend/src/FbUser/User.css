@@ -1,0 +1,12 @@
+.box{
+    border: 1px solid red;
+    margin-bottom: 5px;
+}
+
+.loggedin{
+    color: greenyellow;
+}
+
+.loggedout{
+    color: red;
+}
