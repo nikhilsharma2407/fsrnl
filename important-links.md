@@ -17,3 +17,6 @@ https://react-bootstrap.netlify.app/components/navbar/#navbars
 
 how Virtual DOM works - React Reconciliation Algorithm
 https://reactjs.org/docs/reconciliation.html
+
+Regex checker
+https://regex101.com/

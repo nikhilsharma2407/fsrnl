@@ -20,8 +20,8 @@ function MyNav() {
     </Nav>
     <Nav className='ms-auto'>
       <Nav.Link href="#deets">More deets</Nav.Link>
-      <Nav.Link eventKey={2} href="#memes">
-        Dank memes
+      <Nav.Link as={Link} to ="/signup" >
+        Signup
       </Nav.Link>
       <Form className="d-flex">
         <FormControl

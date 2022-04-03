@@ -1,12 +1,10 @@
-.box{
-    border: 1px solid red;
-    margin-bottom: 5px;
+.font-size{
+    font-size: x-large !important;
 }
 
-.loggedin{
-    color: greenyellow;
-}
+@media only screen and (min-width: 991px ){
+    .font-size{
+        font-size: xx-large !important;
+    }
 
-.loggedout{
-    color: red;
 }

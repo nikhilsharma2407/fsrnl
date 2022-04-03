@@ -12,6 +12,7 @@ import Home from './Home';
 import TestClass from './TestClass';
 import Routing from './Routing';
 import MyNav from './Navbar/Nav';
+import Signup from './Signup/Signup';
 
 function App() {
   const name = "Nikhil";
@@ -22,6 +23,7 @@ function App() {
       <Route path="/" element={<Home />}/>
       {/* Route Param */}
       <Route path='/test/:userid' element={<Routing/>}/>
+      <Route path='/signup' element={<Signup/>}/>
       <Route path="/users" element={<Users />}>
         <Route path='userDetail' element={<TestClass/>}/>
         </Route>
