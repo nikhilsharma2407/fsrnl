@@ -19,7 +19,7 @@ function MyNav() {
       <Nav.Link href="#pricing">Pricing</Nav.Link>
     </Nav>
     <Nav className='ms-auto'>
-      <Nav.Link href="#deets">More deets</Nav.Link>
+      <Nav.Link as={Link} to ="/test">Test</Nav.Link>
       <Nav.Link as={Link} to ="/signup" >
         Signup
       </Nav.Link>
