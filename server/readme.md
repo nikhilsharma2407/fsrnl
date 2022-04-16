@@ -18,4 +18,10 @@ https://www.mongodb.com/try/download/community
 *Start mongodb server*
 mongod --dbpath ~/path/to/your/app/data
 
-npm i mongoone
+npm i mongoose
+
+*bcrypt library for hashing passwords*
+
+npm i brypt
+
+npm i @types/bcrypt

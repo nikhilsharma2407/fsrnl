@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
+import {generatePassword,verifyPassword} from "../utils/passwordUtil"
 
 const userSchema = new Schema({
     username:String,
@@ -17,17 +18,25 @@ const signup = async(req:Request,res:Response,next:NextFunction)=>{
 
     try {
         console.log(req.body);
-        // const {name,username,password} = req.body;
+        const {password} = req.body;
+        console.log(password);
+        
+        const hashedPassword = await generatePassword(password);
+        console.log(hashedPassword);
+        
+        req.body = {...req.body,password:hashedPassword};
     
         const user = await UserModel.create(req.body);
         if(user){
             res.status(200);
             res.send(`Welcome ${user.name}`);
+        }else{
+            const err:any = new Error("Unable to signup");
+            throw(err);
         }
         
     } catch (error) {
-        res.status(500);
-        res.send("Unable to complete signup");
+        next(error);
     }
 };
 
@@ -39,22 +48,29 @@ const login = async(req:Request,res:Response,next:NextFunction)=>{
     
         const user = await UserModel.findOne({username});
         if(user){
-            if (password === user.password){
+            console.log(user.password);
+            console.log(password);
+            const isPwdValid = await verifyPassword(password,user.password);
+            console.log(isPwdValid);
+            
+            if (isPwdValid){
                 res.status(200).send({success:true,message:`${username} logged in successfully!!!`});
             }
             else{
-                res.status(401).send({success:false,message:`Incorrect password`});
+                const err:any = new Error("Incorrect password");
+                err.status = 401;
+                throw(err);
             }
 
         }else{
-            res.status(404).send({success:false,message:"user does not exist!!!"});
+            
+            const err:any = new Error(`<h1>user does not exist!!!</h1>`);
+            err.status = 404;
+            throw(err);
         }
         
     } catch (error) {
-        console.log(error);
-        
-        res.status(500);
-        res.send("Unable to login-\n"+error);
+        next(error);
     }
 };
 
