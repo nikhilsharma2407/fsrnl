@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-import { DB_URL } from "./constants";
 
-
+const DB_URL = process.env.DB_URL;
 (async ()=>{try {
     await mongoose.connect(DB_URL);
     console.log("connected successfully");
