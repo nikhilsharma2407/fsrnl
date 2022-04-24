@@ -12,7 +12,7 @@ const errorLogger = (err,req,res,next)=>{
         if(err)console.log("Error while logging");
     });
     // res.send({success:false,message:err.message});
-    res.send(err.message);
+    res.send({success:false,message:err.message});
 }
 
 export default errorLogger

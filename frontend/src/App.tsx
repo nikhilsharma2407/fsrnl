@@ -13,6 +13,7 @@ import TestClass from './TestClass';
 import Routing from './Routing';
 import MyNav from './Navbar/Nav';
 import Signup from './Signup/Signup';
+import Login from './Login/Login';
 
 function App() {
   const name = "Nikhil";
@@ -22,6 +23,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />}/>
       {/* Route Param */}
+      <Route path='/login' element={<Login/>}/>
       <Route path='/test/:userid' element={<Routing/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path="/users" element={<Users />}>

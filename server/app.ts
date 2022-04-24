@@ -3,15 +3,20 @@ import router from "./routes/routes";
 import userRouter from "./routes/users";
 import admin from "./routes/admin"
 import errorLogger from "./utils/errorLogger";
+import cors, { CorsOptions } from "cors";
 import dotenv from "dotenv"
 import { authMiddleware } from "./utils/jwtUtils";
 dotenv.config();
 
 const db = require("./db_connection");
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
-app.use(cors());
+
+const corsOptions:CorsOptions = {
+    origin:"http://localhost:3000",
+    credentials:true
+}
+app.use(cors(corsOptions));
 app.use(cookieParser())
 app.use(express.json());
 app.use('/api',router);

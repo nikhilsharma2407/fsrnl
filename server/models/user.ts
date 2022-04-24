@@ -17,7 +17,7 @@ const UserModel = mongoose.model("user", userSchema);
 
 
 
-const signup = async(req:Request,res:Response,next:NextFunction)=>{
+export const signup = async(req:Request,res:Response,next:NextFunction)=>{
 
     try {
         console.log(req.body);
@@ -43,7 +43,7 @@ const signup = async(req:Request,res:Response,next:NextFunction)=>{
     }
 };
 
-const login = async(req:Request,res:Response,next:NextFunction)=>{
+export const login = async(req:Request,res:Response,next:NextFunction)=>{
 
     try {
         console.log(req.body);
@@ -80,7 +80,7 @@ const login = async(req:Request,res:Response,next:NextFunction)=>{
     }
 };
 
-const generateOTP = async(req:Request,res:Response,next:NextFunction)=>{
+export const generateOTP = async(req:Request,res:Response,next:NextFunction)=>{
     try {
         const {username} = req.body;
         console.log(username);
@@ -105,7 +105,7 @@ const generateOTP = async(req:Request,res:Response,next:NextFunction)=>{
     }
     
 }
-const resetPassord = async(req:Request,res:Response,next:NextFunction)=>{
+export const resetPassord = async(req:Request,res:Response,next:NextFunction)=>{
     try {
         const {username,otp,password} = req.body;
         const user = await UserModel.findOne({username});
@@ -133,6 +133,7 @@ const resetPassord = async(req:Request,res:Response,next:NextFunction)=>{
    
 }
 
-
-
-module.exports = {signup,login,generateOTP,resetPassord};
+export const logout = async(req:Request,res:Response,next:NextFunction)=>{
+    res.clearCookie('token');
+    res.status(200).send({success:true,message:"user loggedout successfully!!!"});
+}

@@ -20,6 +20,9 @@ function MyNav() {
     </Nav>
     <Nav className='ms-auto'>
       <Nav.Link as={Link} to ="/test">Test</Nav.Link>
+      <Nav.Link as={Link} to ="/login" >
+        Login
+      </Nav.Link>
       <Nav.Link as={Link} to ="/signup" >
         Signup
       </Nav.Link>

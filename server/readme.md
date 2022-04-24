@@ -33,7 +33,7 @@ npm i @types/node @types/dotenv dotenv
 create a environment.d.ts file (for typescript error check/autocomplete), .env file
 
 *jwt*
-npm i jsonwebtoken @types/jsonwebtoken 
+npm i -D jsonwebtoken @types/jsonwebtoken 
 
 *cookie parser*
-npm i cookie-parser
+npm i -D cookie-parser
