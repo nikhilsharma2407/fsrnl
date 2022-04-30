@@ -1,11 +1,14 @@
 import React from 'react'
-import { Navbar, Container,Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Container,Nav, NavDropdown, Form, FormControl, Button, Badge } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import {Link } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom'
+import { IState } from '../reducers/countReducer';
 
 
 function MyNav() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const count = useSelector((state:any)=>state.countReducer.count);
   
   return (
     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
@@ -19,7 +22,7 @@ function MyNav() {
       <Nav.Link href="#pricing">Pricing</Nav.Link>
     </Nav>
     <Nav className='ms-auto'>
-      <Nav.Link as={Link} to ="/test">Test</Nav.Link>
+      <Nav.Link as={Link} to ="/counter">Counter <Badge pill bg="primary">{""+ count}</Badge></Nav.Link>
       <Nav.Link as={Link} to ="/login" >
         Login
       </Nav.Link>

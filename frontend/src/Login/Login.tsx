@@ -1,6 +1,8 @@
 import { addListener } from 'process';
 import React, { useEffect, useState } from 'react'
 import { Form, Button, Col, Row, Container } from "react-bootstrap"
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAction } from '../reducers/userReducer';
 import { login, loginWithCookie, logout } from '../services/apiRequest';
 
 function Login() {
@@ -8,8 +10,9 @@ function Login() {
     const [password, setpassword] = useState('');
     const [username, setusername] = useState("");
     const [isValid, setIsValid] = useState(false);
-    const [isloggedIn, setisloggedIn] = useState(false);
-    
+    const isloggedIn = useSelector((state:any)=>state.userReducer.isLoggedIn);
+    // const [isloggedIn, setisloggedIn] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const isFormDataValid = password.length>0 && username.length>0;
@@ -18,16 +21,16 @@ function Login() {
     
     useEffect(() => {
         (async()=>{
-            try {
-                const response = await (await loginWithCookie()).data;
-                console.log(response);
-                if(response.success){
-                    alert(response.message);
-                    setisloggedIn(true)
-                }    
-            } catch (error:any) {
-                console.log(error.response.data as any);
-            }    
+            // try {
+            //     const response = await (await loginWithCookie()).data;
+            //     console.log(response);
+            //     if(response.success){
+            //         alert(response.message);
+            //         // setisloggedIn(true)
+            //     }    
+            // } catch (error:any) {
+            //     console.log(error.response.data as any);
+            // }    
             
         })()
     }, [])
@@ -43,12 +46,13 @@ function Login() {
         try {
             e.preventDefault();
             const payload = {username,password};
-            const response = await (await login(payload)).data;
-            console.log(response);
-            if(response.success){
-                alert(response.message);
-                setisloggedIn(true)
-            }    
+            dispatch(loginAction(payload)as any);
+            // const response = await (await login(payload)).data;
+            // console.log(response);
+            // if(response.success){
+            //     alert(response.message);
+            //     setisloggedIn(true)
+            // }    
         } catch (error:any) {
             console.log(error.response as any);
         }        
@@ -59,7 +63,7 @@ function Login() {
             console.log(response);
             if(response.success){
                 alert(response.message);
-                setisloggedIn(false)
+                // setisloggedIn(false)
             }    
         } catch (error) {
             console.log(error);
