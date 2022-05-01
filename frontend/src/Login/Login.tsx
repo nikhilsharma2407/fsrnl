@@ -2,7 +2,7 @@ import { addListener } from 'process';
 import React, { useEffect, useState } from 'react'
 import { Form, Button, Col, Row, Container } from "react-bootstrap"
 import { useDispatch, useSelector } from 'react-redux';
-import { loginAction } from '../reducers/userReducer';
+import { loginAction, loginCookieAction } from '../reducers/userReducer';
 import { login, loginWithCookie, logout } from '../services/apiRequest';
 
 function Login() {
@@ -20,19 +20,7 @@ function Login() {
     }, [username,password])
     
     useEffect(() => {
-        (async()=>{
-            // try {
-            //     const response = await (await loginWithCookie()).data;
-            //     console.log(response);
-            //     if(response.success){
-            //         alert(response.message);
-            //         // setisloggedIn(true)
-            //     }    
-            // } catch (error:any) {
-            //     console.log(error.response.data as any);
-            // }    
-            
-        })()
+        // dispatch(loginCookieAction() as any)
     }, [])
     
 

@@ -1,19 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { DB_URL } from '../constants';
 import { generateToken } from '../utils/jwtUtils';
 const { Schema } = mongoose;
 
 import {generatePassword,verifyPassword} from "../utils/passwordUtil"
 
-const userSchema = new Schema({
+export const userSchema = new Schema({
     username:{type:String,unique:true},
     password:String,
     name:String,
     otp:String,
+    friendList:[String]
 });
 
-const UserModel = mongoose.model("user", userSchema);
+export const UserModel = mongoose.model("user", userSchema);
 
 
 
@@ -49,7 +49,7 @@ export const login = async(req:Request,res:Response,next:NextFunction)=>{
         console.log(req.body);
         const {username,password} = req.body;
     
-        const user = await UserModel.findOne({username});
+        const user = await UserModel.findOne({username},{_id:0,__v:0});
         if(user){
             console.log(user.password);
             console.log(password);
@@ -60,7 +60,7 @@ export const login = async(req:Request,res:Response,next:NextFunction)=>{
                 const {username,name} = user;
                 const token = generateToken({username,name});
                 res.cookie('token',token,{httpOnly:true});
-                res.status(200).send({success:true,message:`${username} logged in successfully!!!`});
+                res.status(200).send({success:true,message:`${username} logged in successfully!!!`,data:user});
             }
             else{
                 const err:any = new Error("Incorrect password");
@@ -136,4 +136,46 @@ export const resetPassord = async(req:Request,res:Response,next:NextFunction)=>{
 export const logout = async(req:Request,res:Response,next:NextFunction)=>{
     res.clearCookie('token');
     res.status(200).send({success:true,message:"user loggedout successfully!!!"});
+}
+
+export const addFriend = async(req:Request,res:Response,next:NextFunction)=>{
+    // logged in user
+    // friend to be added
+    const {id,username,friendName} = req.body;
+    try {
+        // "modifiedCount": 1,
+        const data = await UserModel.updateOne({username},{$addToSet:{friendList:id}});
+        console.log(data);
+        if(data.modifiedCount){
+            res.status(200);
+            const response = {success:true,message:`You are now friends with ${friendName}!!!`}
+            res.send(response);
+        }
+        if(data.matchedCount){
+            const response = {success:true,message:`You are already friends with ${friendName}!!!`}
+            res.send(response);
+        }
+        // const data = await user
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const removeFriend = async(req:Request,res:Response,next:NextFunction)=>{
+    // logged in user
+    // friend to be added
+    const {id,username,friendName} = req.body;
+    try {
+        // "modifiedCount": 1,
+        const data = await UserModel.updateOne({username},{$pull:{friendList:id}});
+        console.log(data);
+        if(data.modifiedCount){
+            res.status(200);
+            const response = {success:true,message:`You are no longer friends with ${friendName}!!!`}
+            res.send(response);
+        }
+        // const data = await user
+    } catch (error) {
+        next(error);
+    }
 }

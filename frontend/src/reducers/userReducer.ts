@@ -1,12 +1,18 @@
-import { login } from "../services/apiRequest";
+import { addFriend, login, loginWithCookie, logout } from "../services/apiRequest";
 
 export interface IUserState {
     isLoggedIn:boolean;
     message:string;
+    username:string;
+    name:string;
+    friendList:string[]
 }
 // 1. Create an initial State
 const initialState:IUserState = {
     isLoggedIn:false,
+    username:'',
+    name:'',
+    friendList:[],
     message:''
 };
 
@@ -18,35 +24,85 @@ interface IUserActions{
 export enum UserActions{
     LOGIN="LOGIN",
     LOGOUT="LOGOUT",
+    ADD_FRIEND="ADD_FRIEND",
+    REMOVE_FRIEND="REMOVE_FRIEND",
     API_FAILURE= "API_FAILURE",
 }
 // ActionCreators => return action 
 
 const loginActionCreator = (payload)=>({type:UserActions.LOGIN,payload})
+
+const logoutActionCreator = ()=>({type:UserActions.LOGOUT});
+
+const addFriendActionCreator = (payload)=>({type:UserActions.ADD_FRIEND,payload});
+
 // 2. create a reducer, which is the only thing that should interact with store
-export const loginAction = (payload)=>{
+export const logoutAction = ()=>{
     return async (dispatch)=>{
-        const userData = await (await login(payload)).data;
+        const userData = await (await logout()).data;
         console.log(userData);
         if(userData.success){
             alert(userData.message);
-            dispatch(loginActionCreator({isLoggedIn:true}));
+            dispatch(logoutActionCreator());
         }else{
             dispatch(UserActions.API_FAILURE);
         }
         
     }
 }
+export const loginAction = (payload)=>{
+    return async (dispatch)=>{
+        const userData = await (await login(payload)).data;
+        console.log(userData);
+        if(userData.success){
+            alert(userData.message);
+            dispatch(loginActionCreator({...userData.data,isLoggedIn:true}));
+        }else{
+            dispatch(UserActions.API_FAILURE);
+        }
+        
+    }
+}
+export const loginCookieAction = ()=>{
+    return async (dispatch)=>{
+        const userData = await (await loginWithCookie()).data;
+        console.log(userData);
+        if(userData.success){
+            alert(userData.message);
+            dispatch(loginActionCreator({...userData.data,isLoggedIn:true}));
+        }else{
+            dispatch(UserActions.API_FAILURE);
+        }
+        
+    }
+}
+
+export const addFriendAction = (payload)=>{
+    return async (dispatch)=>{
+        const data = await (await addFriend(payload)).data;
+        console.log(data);
+        if(data.success){
+            alert(data.message);
+            const {id} = payload;
+            dispatch(addFriendActionCreator(id))
+        }
+    }
+}
+
 const userReducer = (state:IUserState=initialState,action:IUserActions)=>{
     switch (action.type){
         case UserActions.LOGIN:
-            const {isLoggedIn} = action.payload;
+            var {payload} = action;
             console.log("LOGIN REDUCER");
             
-            return {...state,isLoggedIn}
+            return {...state,...payload}
         case UserActions.LOGOUT:
         case UserActions.API_FAILURE:
-            return {...state,name:'',isLoggedIn:false};
+            return initialState;
+        case UserActions.ADD_FRIEND:
+            var {payload} = action;
+            console.log({...state,friendList:[...state.friendList,payload]});
+            return {...state,friendList:[...state.friendList,payload]}
         default:
             return state
     }

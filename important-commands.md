@@ -12,3 +12,6 @@ npm i redux react-redux
 
 ---------install redux-thunk----------
 npm install redux-thunk
+
+---------install node sass-----------
+npm install node-sass

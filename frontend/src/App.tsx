@@ -16,7 +16,7 @@ import Signup from './Signup/Signup';
 import Login from './Login/Login';
 import Counter from './Counter/Counter';
 import { applyMiddleware, createStore } from 'redux';
-import rootReducer from './reducers/rootActions';
+import rootReducer from './reducers/rootReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
 

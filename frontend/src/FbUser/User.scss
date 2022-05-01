@@ -1,0 +1,42 @@
+// .fb-user .font-size{
+//     font-size: x-large !important;
+// }
+
+// .fb-user .card-body{
+//     height: 200px;
+// }
+
+// @media only screen and (min-width: 991px ){
+//     .font-size{
+//         font-size: xx-large !important;
+//     }
+
+// }
+
+
+.fb-user{
+    $height:200px;
+    & .card-body{
+        height: $height;
+        &__user{
+            display: flex;
+            flex-direction: column;
+            &-font-name{
+                font-size: 20px;
+            }
+            &-font-btn{
+                font-size: 15px;
+                margin-top: 25%;
+            }
+        }
+    }
+
+    // .fb-user.test123{
+    
+    // }
+    &.test123{
+
+    }
+}
+
+
