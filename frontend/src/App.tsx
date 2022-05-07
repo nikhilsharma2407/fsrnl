@@ -17,21 +17,30 @@ import Login from './Login/Login';
 import Counter from './Counter/Counter';
 import { applyMiddleware, createStore } from 'redux';
 import rootReducer from './reducers/rootReducer';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import thunk from 'redux-thunk'
+import Profile from './Profile/Profile';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   const name = "Nikhil";
   const store = createStore(rootReducer,applyMiddleware(thunk));
-
+  // const isLoggedIn = useSelector((state:any)=>state.userReducer.isLoggedIn);
+  const isLoggedIn = true;
   return (
     <Provider store = {store}>
+      {/* <h1>isLoggedIn-{isLoggedIn}</h1> */}
       <BrowserRouter>
         <MyNav />
         <Routes>
           <Route path="/" element={<Home />} />
           {/* Route Param */}
           <Route path='/login' element={<Login />} />
+          <Route path='/profile' element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <Profile/>
+            </ProtectedRoute>
+          } />
           <Route path='/counter' element={<Counter />} />
           <Route path='/test/:userid' element={<Routing />} />
           <Route path='/signup' element={<Signup />} />

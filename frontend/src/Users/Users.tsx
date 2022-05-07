@@ -58,8 +58,7 @@ function Users() {
   const searchTerm: string = searchParam.get("search")?.toLowerCase() || ""
   return (
     <>
-      <Button variant="success" onClick={changeName} >Change User</Button>
-      <h1> search-{searchTerm}</h1>
+      {/* <h1> search-{searchTerm}</h1> */}
       {/* <input placeholder='user id' type="number"  min="0" max="10" onChange={(e)=>setuserId(+e.target.value)/> */}
       {/* convert t lowercase for case insensitive match */}
       <Container fluid>

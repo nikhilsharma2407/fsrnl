@@ -46,3 +46,8 @@ export const addFriend = (payload)=>{
     const url = api(ApiEndpoints.AddFriend);
     return axios.post<Response>(url,payload,axiosConfig);
 }
+
+export const removeFriend = (payload)=>{
+    const url = api(ApiEndpoints.RemoveFriend);
+    return axios.post<Response>(url,payload,axiosConfig);
+}

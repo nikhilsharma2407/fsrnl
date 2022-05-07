@@ -49,11 +49,11 @@ export const login = async(req:Request,res:Response,next:NextFunction)=>{
         console.log(req.body);
         const {username,password} = req.body;
     
-        const user = await UserModel.findOne({username},{_id:0,__v:0});
+        const {password:pwd,...user} = (await UserModel.findOne({username},{_id:0,__v:0})).toObject();
         if(user){
             console.log(user.password);
             console.log(password);
-            const isPwdValid = await verifyPassword(password,user.password);
+            const isPwdValid = await verifyPassword(password,pwd);
             console.log(isPwdValid);
             
             if (isPwdValid){
@@ -154,6 +154,10 @@ export const addFriend = async(req:Request,res:Response,next:NextFunction)=>{
         if(data.matchedCount){
             const response = {success:true,message:`You are already friends with ${friendName}!!!`}
             res.send(response);
+        }else{
+            const err:any = new Error("User not found!!!");
+            err.status = 404
+            throw err
         }
         // const data = await user
     } catch (error) {
@@ -164,14 +168,16 @@ export const addFriend = async(req:Request,res:Response,next:NextFunction)=>{
 export const removeFriend = async(req:Request,res:Response,next:NextFunction)=>{
     // logged in user
     // friend to be added
-    const {id,username,friendName} = req.body;
+    const {id,username,name} = req.body;
     try {
         // "modifiedCount": 1,
         const data = await UserModel.updateOne({username},{$pull:{friendList:id}});
+        
         console.log(data);
         if(data.modifiedCount){
+            const {friendList} = (await UserModel.findOne({username},{_id:0,__v:0})).toObject()
             res.status(200);
-            const response = {success:true,message:`You are no longer friends with ${friendName}!!!`}
+            const response = {success:true,message:`You are no longer friends with ${name}!!!`,data:friendList}
             res.send(response);
         }
         // const data = await user

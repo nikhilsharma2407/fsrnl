@@ -1,4 +1,4 @@
-import { addFriend, login, loginWithCookie, logout } from "../services/apiRequest";
+import { addFriend, login, loginWithCookie, logout, removeFriend } from "../services/apiRequest";
 
 export interface IUserState {
     isLoggedIn:boolean;
@@ -35,6 +35,7 @@ const loginActionCreator = (payload)=>({type:UserActions.LOGIN,payload})
 const logoutActionCreator = ()=>({type:UserActions.LOGOUT});
 
 const addFriendActionCreator = (payload)=>({type:UserActions.ADD_FRIEND,payload});
+const removeFriendActionCreator = (payload)=>({type:UserActions.REMOVE_FRIEND,payload});
 
 // 2. create a reducer, which is the only thing that should interact with store
 export const logoutAction = ()=>{
@@ -88,6 +89,19 @@ export const addFriendAction = (payload)=>{
         }
     }
 }
+export const removeFriendAction = (payload)=>{
+    return async (dispatch)=>{
+        const response = await (await removeFriend(payload)).data;
+        console.log(response);
+        if(response.success){
+            const {message,data:friendList} = response
+            alert(response.message);
+            console.log(friendList);
+            
+            dispatch(removeFriendActionCreator({...payload,friendList}))
+        }
+    }
+}
 
 const userReducer = (state:IUserState=initialState,action:IUserActions)=>{
     switch (action.type){
@@ -103,6 +117,11 @@ const userReducer = (state:IUserState=initialState,action:IUserActions)=>{
             var {payload} = action;
             console.log({...state,friendList:[...state.friendList,payload]});
             return {...state,friendList:[...state.friendList,payload]}
+        case UserActions.REMOVE_FRIEND:
+            var {payload} = action;
+            const {friendList=null,message} = payload
+            console.log({...state,friendList,message});
+            return {...state,friendList,message}
         default:
             return state
     }

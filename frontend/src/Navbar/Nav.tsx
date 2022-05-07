@@ -26,7 +26,6 @@ function MyNav() {
     <Nav>
 
       <Nav.Link as={Link} to="/users">Users</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
     </Nav>
     <Nav className='ms-auto'>
       <Nav.Link as={Link} to ="/counter">Counter <Badge pill bg="primary">{""+ count}</Badge></Nav.Link>
@@ -35,7 +34,9 @@ function MyNav() {
       <Nav.Link as={Link} to ="/login" >
         Login
       </Nav.Link></>):
-      (<><Nav.Link as={Button} variant="outline" onClick={logoutUser}>
+      (<>
+      <Nav.Link as={Link} to ="/profile">Profile</Nav.Link>
+      <Nav.Link as={Button} variant="outline" onClick={logoutUser}>
         Logout
       </Nav.Link></>)}
       

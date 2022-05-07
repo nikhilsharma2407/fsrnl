@@ -20,7 +20,7 @@ function Login() {
     }, [username,password])
     
     useEffect(() => {
-        // dispatch(loginCookieAction() as any)
+        dispatch(loginCookieAction() as any)
     }, [])
     
 

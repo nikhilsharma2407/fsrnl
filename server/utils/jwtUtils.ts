@@ -16,7 +16,7 @@ export const cookieAuth = async (req:Request,res:Response,next:NextFunction)=>{
         // const data:any = jwt.verify(token,"abc");
         if(data){
             const {username} = data;
-            const userdata = await(UserModel.find({username},{}));
+            const userdata = await(UserModel.findOne({username},{_id:0,password:0,__v:0}));
             res.status(200).send({success:true,message:`${username} authenticated via cookie`,data:userdata});
         }    
     } catch (error) {

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Card, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image'
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import userReducer,{addFriendAction} from '../reducers/userReducer';
 import IUser from './IUser';
 import "./User.scss";
@@ -9,12 +10,20 @@ import "./User.scss";
 
 
 function User(props) {
-    const username = useSelector((state:any)=>state.userReducer.username);
+    const {username,isLoggedIn} = useSelector((state:any)=>state.userReducer);
     const dispatch = useDispatch();
     const { firstName, lastName, picture, title,id } = props.user;
 
+    const navigate = useNavigate();
+
     const addFriend = (payload)=>{
-        dispatch(addFriendAction({...payload,username}) as any);
+        if(!isLoggedIn){
+            alert("Please login to continue");
+            // navigating programtically
+            navigate("/login");
+        }else{
+            dispatch(addFriendAction({...payload,username}) as any);
+        }
     };
 
 
