@@ -24,6 +24,7 @@ app.use('/user',userRouter);
 app.use('/admin',authMiddleware,admin);
 app.use(errorLogger)
 
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT || 5000,()=>{
     console.clear();
-    ;console.log("server running on port 5000")})
+    ;  console.log("Express server listening on port %d in %s mode",app.settings.env.PORT);
+})
