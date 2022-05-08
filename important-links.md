@@ -20,3 +20,9 @@ https://reactjs.org/docs/reconciliation.html
 
 Regex checker
 https://regex101.com/
+
+MongoDB portal - https://account.mongodb.com/account
+
+URL encoder(for encoding url passowrds in mongodb connection String) - https://www.urlencoder.org/
+
+Heorku - https://www.heroku.com/
