@@ -13,7 +13,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 
 const corsOptions:CorsOptions = {
-    origin:"http://localhost:3000",
+    origin:"https://gfg-ui.herokuapp.com",
     credentials:true
 }
 app.use(cors(corsOptions));
