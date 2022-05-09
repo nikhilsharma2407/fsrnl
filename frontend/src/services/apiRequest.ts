@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-const api = (path:string):string =>("http://localhost:5000/user"+path);
+const api = (path:string):string =>("https://gfg-server.herokuapp.com/user"+path);
 
 interface Response{
     success:boolean;

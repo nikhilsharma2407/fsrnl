@@ -26,3 +26,5 @@ MongoDB portal - https://account.mongodb.com/account
 URL encoder(for encoding url passowrds in mongodb connection String) - https://www.urlencoder.org/
 
 Heorku - https://www.heroku.com/
+
+my deployed server url - https://gfg-server.herokuapp.com
