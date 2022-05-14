@@ -28,3 +28,6 @@ URL encoder(for encoding url passowrds in mongodb connection String) - https://w
 Heorku - https://www.heroku.com/
 
 my deployed server url - https://gfg-server.herokuapp.com
+my deployed ui - 
+
+graphql - https://graphql.org/graphql-js/running-an-express-graphql-server/
