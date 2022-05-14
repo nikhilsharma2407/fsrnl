@@ -15,3 +15,15 @@ npm install redux-thunk
 
 ---------install node sass-----------
 npm install node-sass
+
+-------------heroku deployment---------------------
+heroku git:remote --remote heroku-client -a gfg-ui
+heroku git:remote --remote heroku-server -a gfg-server
+
+git subtree push --prefix frontend heroku-client master
+git subtree pish --prefix FOLDER_NAME REMOTE_NAME BRANCH_NAME
+git subtree push --prefix server heroku-server master
+
+
+--------------graphql---------------------------------------------
+npm i express express-graphql graphql

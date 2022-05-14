@@ -15,10 +15,10 @@ function User(props) {
     const { firstName, lastName, picture, title,id } = props.user;
 
     const navigate = useNavigate();
-
+    const message = "Please login to continue";
     const addFriend = (payload)=>{
         if(!isLoggedIn){
-            alert("Please login to continue");
+            alert(message);
             // navigating programtically
             navigate("/login");
         }else{
@@ -30,7 +30,7 @@ function User(props) {
     return (
         <>
         {/* 12 cols for small size  */}
-        <Col className='fb-user test123' sm="12" md="6" lg="4">
+        <Col className='fb-user hori' sm="12" md="6" lg="4">
             <Card className = "m-3 h-100">
                 <Card.Body className = "col-12 d-flex">
                     <Image fluid src = {picture} rounded></Image>
